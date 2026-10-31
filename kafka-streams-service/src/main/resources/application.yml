@@ -1,0 +1,20 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: kafka-streams-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    streams:
+      application-id: digital-events-streams
+      properties:
+        default:
+          key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          value.serde: org.apache.kafka.common.serialization.Serdes$LongSerde
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

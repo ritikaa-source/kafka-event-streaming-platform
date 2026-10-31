@@ -1,0 +1,2 @@
+MONITOR eventId=E10001 type=VIDEO_STARTED user=U101 device=D900
+MONITOR eventId=E10001 type=VIDEO_STARTED user=U101 device=D900

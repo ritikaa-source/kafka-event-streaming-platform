@@ -1,0 +1,23 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: monitoring-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: monitoring-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        "[spring.json.value.default.type]": "com.example.monitoring.model.DigitalEvent"
+        "[spring.json.trusted.packages]": "com.example.monitoring"
+    listener:
+      ack-mode: record
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

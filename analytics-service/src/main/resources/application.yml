@@ -1,0 +1,27 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: analytics-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: analytics-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        "[spring.json.value.default.type]": "com.example.analytics.model.DigitalEvent"
+        "[spring.json.trusted.packages]": "com.example.analytics"
+    listener:
+      ack-mode: record
+  datasource:
+    url: jdbc:postgresql://localhost:5433/event_platform
+    username: event_user
+    password: ${POSTGRES_PASSWORD:event_password}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
